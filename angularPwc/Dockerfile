@@ -25,7 +25,7 @@ FROM nginx:latest
 
 COPY src/nginx/etc/conf.d/default.conf /etc/nginx/conf.d/default.conf
 # Copy the built Angular app from the previous stage to Nginx's web root directory
-COPY --from=build /app/dist/back-test /usr/share/nginx/html
+COPY --from=build /app/dist/pw-cproject /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
