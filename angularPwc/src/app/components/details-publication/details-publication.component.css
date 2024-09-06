@@ -1,0 +1,46 @@
+.small-card {
+
+    border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+    border-radius: 10px;
+    margin-left: 100px ;
+    margin-right:40px ;/* Optional: Add rounded corners */
+}
+.cc1 {
+
+    padding: 20px; /* Add padding to the card */
+    border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+    border-radius: 10px;
+    margin-left: 50px ;
+    margin-right:50px ;
+    margin-top : 100px;
+}
+.small-card .card-body {
+    padding: 15px; /* Adjust padding inside the card body */
+}
+
+.small-card .post-details h3 {
+    font-size: 1.25em; /* Adjust font size for the title */
+}
+
+.small-card .post-details ul {
+    padding: 0;
+    margin: 10px 0;
+}
+
+.small-card .post-details li {
+    font-size: 0.9em; /* Adjust font size for list items */
+}
+
+.small-card .post-details img {
+    max-height: 200px; /* Adjust the height of the image */
+    object-fit: cover; /* Ensure the image covers the space */
+}
+
+.small-card .comment-form textarea {
+    height: 100px; /* Adjust the height of the textarea */
+}
+
+.small-card .submit {
+    width: 100%; /* Make the submit button full width */
+    padding: 10px; /* Adjust padding for the button */
+}

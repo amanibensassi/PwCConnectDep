@@ -1,0 +1,96 @@
+
+<div class="content-body">
+
+    <div class="card cc1">
+        <div class="card-body">
+            <div class="post-details">
+                <div class="d-flex align-items-center">
+                    <img [src]="'data:image/png;base64,' + pub.utilisateur?.picture" class="rounded-circle mx-2" alt="Profile" style="width: 60px; height: 60px;">
+                    <h3 class="mb-0 text-black">{{pub.utilisateur.prenom}} {{pub.utilisateur.nom}}</h3>
+                  </div>
+    
+                <ul class="mb-4 post-meta d-flex flex-wrap">
+                    <li class="post-date me-3"><i class="fas fa-calendar-check me-2"></i>{{pub.date | date:'MMM dd, yyyy à HH:mm '}}</li>
+                </ul>
+                <img src="images/profile/8.jpg" alt="" class="img-fluid mb-3 w-100 rounded">
+                <p>{{pub.corps}}</p>
+                <div *ngIf="pub.picture">
+                    <img [src]="'data:image/png;base64,'+pub?.picture" alt="" class="img-fluid  rounded" style="height: 500px;width : 700px; margin-top: 30px; margin-left: 350px;">
+				</div>
+                
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- gestion logo and counts for like & dislike    -->
+                    <div class="d-flex align-items-center">	
+                        <div *ngIf="!boolLike"> 
+                            <button class="btn p-0 border-0 bg-transparent" (click)="likePub(pub.id)">
+                            <svg class="me-1" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.8401 4.60896C20.3294 4.09796 19.7229 3.6926 19.0555 3.41604C18.388 3.13948 17.6726 2.99713 16.9501 2.99713C16.2276 2.99713 15.5122 3.13948 14.8448 3.41604C14.1773 3.6926 13.5709 4.09796 13.0601 4.60896L12.0001 5.66896L10.9401 4.60896C9.90843 3.57726 8.50915 2.99767 7.05012 2.99767C5.59109 2.99767 4.19181 3.57726 3.16012 4.60896C2.12843 5.64065 1.54883 7.03992 1.54883 8.49896C1.54883 9.95799 2.12843 11.3573 3.16012 12.389L4.22012 13.449L12.0001 21.229L19.7801 13.449L20.8401 12.389C21.3511 11.8782 21.7565 11.2718 22.033 10.6043C22.3096 9.93685 22.4519 9.22144 22.4519 8.49896C22.4519 7.77647 22.3096 7.06106 22.033 6.3936C21.7565 5.72614 21.3511 5.11971 20.8401 4.60896Z" fill="NONE" stroke="#000000" stroke-width="0.5" ></path>
+                            </svg>	
+                        </button>
+                        </div>
+                        <div *ngIf="boolLike" > 
+                            <button class="btn p-0 border-0 bg-transparent" (click)="dislikePub(pub.id)">
+                            <svg class="me-1" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.8401 4.60896C20.3294 4.09796 19.7229 3.6926 19.0555 3.41604C18.388 3.13948 17.6726 2.99713 16.9501 2.99713C16.2276 2.99713 15.5122 3.13948 14.8448 3.41604C14.1773 3.6926 13.5709 4.09796 13.0601 4.60896L12.0001 5.66896L10.9401 4.60896C9.90843 3.57726 8.50915 2.99767 7.05012 2.99767C5.59109 2.99767 4.19181 3.57726 3.16012 4.60896C2.12843 5.64065 1.54883 7.03992 1.54883 8.49896C1.54883 9.95799 2.12843 11.3573 3.16012 12.389L4.22012 13.449L12.0001 21.229L19.7801 13.449L20.8401 12.389C21.3511 11.8782 21.7565 11.2718 22.033 10.6043C22.3096 9.93685 22.4519 9.22144 22.4519 8.49896C22.4519 7.77647 22.3096 7.06106 22.033 6.3936C21.7565 5.72614 21.3511 5.11971 20.8401 4.60896Z" fill="#B22222"  ></path>
+                            </svg>	
+                            </button>
+                        </div>
+        <!--  count likes   -->
+                        <H6 class="text-black mb-0">{{nbLove}}</H6>
+                        <div class="post-comment" style="margin-left: 15px;"><i class="fas fa-comment me-1"  style="font-size: 1.5em;"></i>{{nbCom}}</div>
+
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card small-card" *ngFor="let com of transform(Comments)">
+        <div class="card-body">
+            <div class="post-details">
+    
+                <div class="d-flex align-items-center">
+                    <img [src]="'data:image/png;base64,' + com.utilisateur?.picture" class="rounded-circle mx-2" alt="Profile" style="width: 50px; height: 50px;">
+                    <h3 class="mb-0 text-black">{{com.utilisateur.prenom}} {{com.utilisateur.nom}}</h3>
+                  </div>
+                <ul class="mb-4 post-meta d-flex flex-wrap">
+                    <li class="post-date me-3"><i class="fas fa-calendar-check me-2"></i>{{com.date | date:'MMM dd, yyyy à HH:mm '}}</li>
+                </ul>
+                <img src="images/profile/8.jpg" alt="" class="img-fluid mb-3 w-100 rounded">
+                <p>{{com.corps}}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card small-card" >
+        <div class="card-body">
+            <div class="post-details">
+                <div class="comment-respond" id="respond">
+                    <h4 class="comment-reply-title text-primary mb-3" id="reply-title">Leave a Reply </h4>
+                    <form class="comment-form" id="commentform" method="post">
+                        <div class="row"> 
+
+
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <textarea rows="8" class="form-control" name="comment" placeholder="Comment" id="comment" [(ngModel)]="body"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <input type="submit" value="Post Comment" class="submit btn btn-primary" id="submit" name="submit" (click)="addcomment(pub.id)">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+      
+            </div>
+        </div>
+    </div>
+
+</div>

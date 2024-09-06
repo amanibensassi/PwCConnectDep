@@ -1,0 +1,128 @@
+
+
+
+<div class="content-body h-800">
+    <div class="col-lg-12" style="margin-top: 40px; margin-right: 30px;">
+        <div class="d-flex justify-content-end p-0">
+            <a class="btn btn-primary btn-sm" routerLink="/users">Nouveau groupe</a>
+        </div>
+    </div>
+    
+
+
+<div class="row col-xl-12" style="margin-top: 20px; margin-left: 10px; ">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body d-flex">
+                <!-- Left Box -->
+                <div class="email-left-box px-0 mb-3 col-lg-4 w-100">
+                    <div class="mail-list rounded overflow-hidden mt-4 ">
+                        <div class=" d-flex justify-content-between my-0">
+                            <h5 style="align-items: center;margin-left: 200px;">Mes conversations</h5>
+                        </div>
+                        <div *ngFor="let chat of listChats">
+                        <div  (click)="getCurrentConverstation(chat.id)" class="list-group-item" *ngIf="chat.id === selectedId" style="background-color: #fee6ea; cursor: pointer;">
+                            <div >
+                          <!--  <i class="fa fa-circle"></i>-->
+                            <span class="icon-warning" *ngFor="let g of chat.emetteur; let isLast = last">
+                                <span *ngIf="g.id_utilisateur != selectedUser.id_utilisateur ">
+                                    <img [src]="'data:image/png;base64,'+g?.picture" class="rounded-circle mx-2" alt="Profile" style="width: 30px; height: 30px;">
+                                </span>
+                                <span *ngIf="g.id_utilisateur != selectedUser.id_utilisateur " style="color: #B22222;">{{g.prenom}} {{g.nom}}</span>
+                            </span>
+                            
+                            </div>
+                           <span style="color: #B22222; font-weight: bolder;  margin-left: 40px; cursor: pointer;"  *ngIf="chat.id !== null && LastMsgList[chat.id]!==null &&LastMsgList[chat.id].emetteur!==null ">{{LastMsgList[chat.id].emetteur.prenom}} : {{LastMsgList[chat.id].text}}</span>
+                            </div>
+                            <div  (click)="getCurrentConverstation(chat.id)" class="list-group-item" *ngIf="chat.id !== selectedId && LastMsgList[chat.id]!==null" >
+                                <div >
+                              <!--  <i class="fa fa-circle"></i>-->
+                                <span class="icon-warning" *ngFor="let g of chat.emetteur; let isLast = last">
+                                    <span *ngIf="g.id_utilisateur != selectedUser.id_utilisateur">
+                                        <img [src]="'data:image/png;base64,'+g?.picture" class="rounded-circle mx-2" alt="Profile" style="width: 30px; height: 30px;">
+                                    </span>
+                                    <span *ngIf="g.id_utilisateur != selectedUser.id_utilisateur">{{g.prenom}} {{g.nom}}</span>
+                                  
+                                </span>
+                                
+                                </div>
+                               <span style = "font-weight: bolder; margin-top: 80px; margin-left: 40px;" *ngIf="chat.id !== null && LastMsgList[chat.id]!==null &&LastMsgList[chat.id].emetteur!==null ">{{LastMsgList[chat.id]!.emetteur.prenom}} : {{LastMsgList[chat.id]!.text}} </span>
+                            </div>
+                            
+                    </div>
+                
+                </div>
+                </div>
+
+                <!-- Right Box -->
+                <div class="email-right-box ms-0 ms-sm-4 col-lg-7">
+
+
+                    <div *ngIf="listOfMessages === null || listOfMessages=== undefined || selectedId === undefined ||selectedId === null">
+                        <div class="email-list mt-2 d-flex flex-column align-items-end ">
+                            
+                            <div class="message">
+                                <div>
+                                    <div class="d-flex message-single">
+                                        <div class="text-black d-inline" style="margin-right: 100px; margin-top: 150px;">
+                                            <h5> Veuillez sélectionner un Chat pour voir vos messages</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div>
+
+                    <div *ngFor="let msg of listOfMessages">
+
+                       
+
+                    <div *ngIf="msg !== null && msg!== undefined">
+                    <div class="email-list mt-2 d-flex flex-column align-items-end " *ngIf="msg.emetteur.id_utilisateur === selectedUser.id_utilisateur">
+                        <img [src]="'data:image/png;base64,'+msg.emetteur?.picture" class="rounded-circle mx-2" alt="Profile" style="width: 30px; height: 30px;">
+                        <h5 class="text-primary d-inline">{{msg.emetteur.prenom}}</h5>
+                        <div>
+                            <span class="text-black d-inline" style="margin-left: 50px;">{{msg.date | date:'MMM dd, yyyy à HH:mm '}}</span>
+                        </div>
+                        <div class="message">
+                            <div>
+                                <div class="d-flex message-single">
+                                    <div class="text-black d-inline" style="margin-left: 20px; margin-top: 20px; margin-bottom: 10px;">
+                                        <h5>{{msg.text}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+                    <div class="email-list mt-2 d-flex flex-column align-items-start" *ngIf="msg.emetteur.id_utilisateur !== selectedUser.id_utilisateur">
+                        <img [src]="'data:image/png;base64,'+msg.emetteur?.picture" class="rounded-circle mx-2" alt="Profile" style="width: 30px; height: 30px;">
+                        <h5 class="text-primary d-inline">{{msg.emetteur.prenom}}</h5>
+                        <div>
+                            <span class="text-black d-inline" style="margin-left: 50px;">{{msg.date | date:'MMM dd, yyyy à HH:mm '}}</span>
+                        </div>
+                        <div class="message">
+                            <div>
+                                <div class="d-flex message-single">
+                                    <div class="text-black d-inline" style="margin-left: 20px; margin-top: 20px; margin-bottom: 10px;">
+                                        <h5>{{msg.text}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div *ngIf="selectedId !== null">
+                        <textarea id="email-compose-editor" class="textarea_editor form-control bg-transparent" rows="15" placeholder="Enter text ..." (ngModelChange)="detectChanges()" [(ngModel)]="msg" ></textarea>
+                        <div class="text-start mt-4 mb-3">
+                            <button class="btn btn-primary btn-sl-sm me-2" type="button" (click)="addmessage()"><span class="me-2"><i class="fa fa-paper-plane"></i></span>Envoyer</button>
+                            <button class="btn btn-danger light btn-sl-sm" type="button" (click)="discard()"><span class="me-2"><i class="fa fa-times"></i></span>Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div> 
+
+

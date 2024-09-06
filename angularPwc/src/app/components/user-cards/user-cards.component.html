@@ -1,0 +1,41 @@
+
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="input-group search-area" style="margin-bottom: 30px;">
+        <input type="text" class="form-control" placeholder="Find something here......" [(ngModel)]="searchTerm" (ngModelChange)="filterUsers()">
+        <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+      </div>
+
+    
+          <div class="col-lg-12 col-xl-6" *ngFor="let user of filteredUsers">
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="menu-product d-flex">
+                    <img [src]="'data:image/png;base64,'+user?.picture">
+                    <div class="content-detail-wrap">
+                      <div>
+                        <h4>{{user.prenom}} {{user.nom}}</h4>
+                        <span>{{user.adresse}}</span>
+                      </div>
+                      <div class="mt-4 d-flex justify-content-between align-items-center">
+                        <div>
+                          <h5 class="mb-0"><span class="fs-14 me-2">Téléphone</span>{{user.telephone}}</h5>
+                          <span class="text-danger">{{user.email}}</span>
+                        </div>
+                        <div>
+                          <a (click)="contacter(user)" class="btn btn-danger" style="color: #FFFFFF;">Contacter</a>
+                        </div>
+                      </div>
+                    </div>
+           
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

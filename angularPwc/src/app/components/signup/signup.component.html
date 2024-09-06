@@ -1,0 +1,81 @@
+<body class="vh-100" data-typography="opensans" data-theme-version="light" data-layout="vertical" data-nav-headerbg="color_1" data-headerbg="color_1" data-sidebar-style="full" data-sibebarbg="color_1" data-sidebar-position="fixed" data-header-position="fixed" data-container="wide" direction="ltr" data-primary="color_1">
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+									<div class="text-center mb-3">
+										<a href="index.html"><img src="images/logo-full.png" alt=""></a>
+									</div>
+                                    <h4 class="text-center mb-4">Inscrivez-vous</h4>
+                                    <form  [formGroup]="registerForm" (ngSubmit)="submitForm()">
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Prénom</strong></label>
+                                            <input type="text" class="form-control" placeholder="prenom" formControlName="prenom">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Nom</strong></label>
+                                            <input type="text" class="form-control" placeholder="nom" formControlName="nom">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Adresse mail</strong></label>
+                                            <input type="email" class="form-control" placeholder="hello@example.com" formControlName="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Téléphone</strong></label>
+                                            <input type="email" class="form-control" placeholder="(+216)" formControlName="telephone">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Grade</strong></label>
+                                            <input type="email" class="form-control" placeholder="..." formControlName="grad">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Détail</strong></label>
+                                            <input type="email" class="form-control" placeholder="details" formControlName="details">
+                                        </div>
+                                        <label class="mb-1"><strong>Photo </strong></label>
+                                        <div class="input-group mb-3 "style="margin-left=30px">
+                                          
+                                            <a class="btn btn-primary light me-1 px-3">  <i class="fa fa-camera m-0"></i> </a>
+                                            
+                                                                <div class="form-file">
+                                                                    <input type="file" class="form-file-input form-control" (change)="onFileSelected($event)">
+                                                                </div>
+                                                            </div>
+                                            
+                                            
+                                       
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>adresse</strong></label>
+                                            <input type="email" class="form-control" placeholder="Tunisie" formControlName="adresse">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Password</strong></label>
+                                            <input type="password" class="form-control" value="Password" formControlName="password">
+                                        </div>
+                                        
+                                        <div class="text-center mt-4">
+                                            <button type="submit" class="btn btn-primary btn-block" 
+                                            >Sign me up</button>
+                                        </div>
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p>Already have an account? <a class="text-primary" (click) = "routing()">Sign in</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
