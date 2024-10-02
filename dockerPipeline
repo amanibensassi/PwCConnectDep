@@ -1,0 +1,87 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('MyDockerCredentials')
+        MYSQL_CREDENTIALS = credentials('MyPostgreCred')
+
+    }
+ stages {
+        stage('Checkout Backend') {
+            steps {
+                git url: 'https://github.com/amanibensassi/PwCConnectDep.git', branch: 'main'
+            }
+        }
+        stage('Build Backend Docker Image') {
+            steps {
+                dir('SpringPwC'){
+                sh 'docker build -t stage-backend .'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker tag stage-backend amanibensassi/pwconnect-back:$BUILD_NUMBER'
+                sh 'docker push amanibensassi/pwconnect-back:$BUILD_NUMBER'
+            }
+            }
+        }
+
+        stage('Checkout Frontend') {
+            steps {
+                git url: 'https://github.com/amanibensassi/PwCConnectDep.git', branch: 'main'
+            }
+        }
+
+        stage('Build Frontend Docker Image') {
+            steps {
+                dir('angularPwc'){
+                sh 'docker build -t stage-frontend .'
+                sh 'docker tag stage-frontend amanibensassi/pwconnect-front:$BUILD_NUMBER'
+                sh 'docker push amanibensassi/pwconnect-front:$BUILD_NUMBER'
+            }}
+        }
+
+        stage('Deploy Application') {
+            steps {
+                // Create Docker network
+                sh 'docker network create my-network || true'
+
+                // Stop and remove old containers
+                sh 'docker stop postgres_db || true'
+                sh 'docker rm postgres_db || true'
+                sh 'docker stop backend_ctr || true'
+                sh 'docker rm backend_ctr || true'
+                sh 'docker stop frontend_ctr || true'
+                sh 'docker rm frontend_ctr || true'
+
+                // Start MySQL container
+                //sh 'docker run -d --network my-network -p 5432:5432 --name postgres_db -e POSTGRES_USER=$MYSQL_CREDENTIALS_USR -e POSTGRES_PASSWORD=$MYSQL_CREDENTIALS_PSW postgres:latest'
+                sh 'docker run -d --network my-network -p 5432:5432 --name postgres_db -e POSTGRES_PASSWORD=$MYSQL_CREDENTIALS_PSW -e POSTGRES_USER=postgres -e POSTGRES_DB=pwcPostgrebd postgres:latest'
+
+                //sh 'docker run -d --network my-network -p 5432:5432 --name postgre_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgresql postgres:latest'
+
+                // Start Backend container
+                sh 'docker run -d --network my-network -p 8089:8089 --name backend_ctr amanibensassi/pwconnect-back:$BUILD_NUMBER'
+
+                // Start Frontend container
+                sh 'docker run -d --network my-network -p 80:80 --name frontend_ctr amanibensassi/pwconnect-front:$BUILD_NUMBER'
+
+               
+
+
+
+
+
+
+            }
+        }
+
+    
+
+        
+        
+       
+
+
+    }
+}
+
+
+
