@@ -18,7 +18,7 @@ export class WebSocketService {
   
   
   initConnectionSocket(){
-    const url = '//localhost:8089/PwCGather/websocket';
+    const url = '//192.168.8.142:8089/PwCGather/websocket';
     const socket = new SockJS(url);
     this.stompClient = Stomp.over(socket);
   }
